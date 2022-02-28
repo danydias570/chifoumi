@@ -1,43 +1,45 @@
-const body = document.querySelector('body');
+const yourScoreEl = document.querySelector("#your-score span");
+const botScoreEl = document.querySelector("#bot-score span");
+const yourChoice = document.getElementById("your-choice");
+const botChoice =document.getElementById("bot-choice");
+
+const choices = ["rock", "paper", "scissors"];
 
 let you;
 let yourScore = 0;
-let opponent;
-let opponentScore = 0;
-let i;
+let bot;
+let botScore = 0;
 
-const choices = ["rock", "paper", "scissors", "shaft"];
 
-window.onload = function() {
-    for (i = 0; i < 3; i++) {
-        let choice = document.createElement("img");
-        choice.id = choices[i];
-        choice.src = choices[i] + ".png";
-        choice.addEventListener("click", selectChoice);
-        document.getElementById("choices").append(choice);
-    }
-};
+for (let i = 0; i < 3; i++) {
+    let choice = document.createElement("img");
+    choice.id = choices[i];
+    choice.src = choices[i] + ".png";
+    choice.addEventListener("click", selectChoice);
+    document.getElementById("choices").append(choice);
+}
+
 
 function selectChoice() {
     you = this.id;
-    document.getElementById("your-choice").src = you + ".png";
-    opponent = choices[Math.floor(Math.random() * 4)];
-    document.getElementById("opponent-choice").src = opponent + ".png";
-    if (you == opponent) {
+    yourChoice.src = you + ".png";
+    bot = choices[Math.floor(Math.random() * 3)];
+    botChoice.src = bot + ".png";
+    if (you == bot) {
         yourScore += 0;
-        opponentScore += 0;
+        botScore += 0;
     }
     else {
         if (you == "rock") {
-            if (opponent == "scissors") {
+            if (bot == "scissors") {
                 yourScore += 1;
             }
-            else if (opponent == "paper") {
-                opponentScore += 1;
+            else if (bot == "paper") {
+                botScore += 1;
             }
         }
         else if (you == "scissors") {
-            if (opponent == "paper") {
+            if (bot == "paper") {
                 yourScore += 1;
             }
             else if (opponent == "rock") {
@@ -45,17 +47,15 @@ function selectChoice() {
             }
         }
         else if (you == "paper") {
-            if (opponent == "rock") {
+            if (bot == "rock") {
                 yourScore += 1;
             }
-            else if (opponent == "scissors") {
-                opponentScore += 1;
+            else if (bot == "scissors") {
+                botScore += 1;
             }
         }
     }
-    document.querySelector("#your-score span").innerText = yourScore;
-    document.querySelector("#opponent-score span").innerText = opponentScore;
-    if (opponent == "shaft"){
-        opponentScore += 10;
-    }
+    yourScoreEl.innerText = yourScore;
+    botScoreEl.innerText = botScore;
 };
+
